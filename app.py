@@ -1,7 +1,7 @@
 import psycopg2 as pg
 import database as db 
 
-from flask import Flask, request, redirect, render_template, url_for, flash, jsonify
+from flask import Flask, request, redirect, render_template, url_for, flash, jsonify, session, current_app
 
 app = Flask(__name__)
 app.secret_key = 'team_3_rules' 
@@ -103,6 +103,11 @@ def drop_workouts():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Initialize the users table and add initial users during the application initialization
+    with current_app.app_context():
+        db.users.create_users_table(db_args)
+        db.users.add_initial_users(db_args)
+
     if request.method == 'POST':
         # Retrieve username and password from the form
         username = request.form['username']
@@ -143,7 +148,7 @@ def about():
             user_first_name = user_details[1]
             return render_template('about.html', user_id=user_id, user_first_name=user_first_name)
 
-    return render_template('about.html', user_id=user_id)
+    return render_template('about.html', user_id=user_id, code=302)
 
 ##########################################
 
@@ -230,10 +235,32 @@ def logout():
 
 @app.route('/exercise_input')
 def render_exercise_input():
+    user_id = request.args.get('user_id')
+
+    if user_id:
+        # If user ID is provided, fetch user details from the database
+        user_details = db.users.get_user_by_id(user_id, db_args)
+
+        if user_details:
+            # Extract first name from user details
+            user_first_name = user_details[1]
+            return render_template('exercise_input.html', user_id=user_id, user_first_name=user_first_name)
+
     return render_template('exercise_input.html')
 
 @app.route('/exercise_log')
 def render_exercise_log():
+    user_id = request.args.get('user_id')
+
+    if user_id:
+        # If user ID is provided, fetch user details from the database
+        user_details = db.users.get_user_by_id(user_id, db_args)
+
+        if user_details:
+            # Extract first name from user details
+            user_first_name = user_details[1]
+            return render_template('exercise_log.html', user_id=user_id, user_first_name=user_first_name)
+
     return render_template('exercise_log.html')
 
 #####################
@@ -241,8 +268,19 @@ def render_exercise_log():
 #   Food 
 #
 
-@app.route('/food_lookup')
+@app.route('/foodlookup')
 def foodlookup():
+    user_id = request.args.get('user_id')
+
+    if user_id:
+        # If user ID is provided, fetch user details from the database
+        user_details = db.users.get_user_by_id(user_id, db_args)
+
+        if user_details:
+            # Extract first name from user details
+            user_first_name = user_details[1]
+            return render_template('foodlookup.html', user_id=user_id, user_first_name=user_first_name)
+            
     return render_template('foodlookup.html')
 
 @app.route('/get_food_suggestions') #NO PAGE
@@ -437,6 +475,17 @@ def selecting():
 
 @app.route('/food_tracking')
 def render_food_tracking():
+    user_id = request.args.get('user_id')
+
+    if user_id:
+        # If user ID is provided, fetch user details from the database
+        user_details = db.users.get_user_by_id(user_id, db_args)
+
+        if user_details:
+            # Extract first name from user details
+            user_first_name = user_details[1]
+            return render_template('food_tracking.html', user_id=user_id, user_first_name=user_first_name)
+
     return render_template('food_tracking.html')
 
 @app.route('/db/food_tracking/histinput', methods=['POST'])

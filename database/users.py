@@ -11,24 +11,23 @@ from psycopg2 import sql
 import os
 
 
-def create_database(db, db_args):
-    if not db.endswith('.db'):
-        db += '.db'
-
-    if os.path.exists(db, db_args):
-        return
+def create_database(db_args):
+    conn = psycopg2.connect(**db_args)
+    cursor = conn.cursor()
 
     try:
-        with db.connect(**db_args) as conn:
-            # No need to create any table here; this is just for initializing the database file
-            pass
+        # No need to create any table here; this is just for initializing the database
+        pass
 
-    except sqlite3.Error as e:
+    except psycopg2.Error as e:
         print(f"Error creating database: {e}")
 
+    finally:
+        conn.close()
+
         
         
-def create_users_table_and_add_users(db_args):
+def create_users_table(db_args):
     conn = psycopg2.connect(**db_args)
     cursor = conn.cursor()
 
@@ -48,17 +47,48 @@ def create_users_table_and_add_users(db_args):
         ''')
         conn.commit()
 
-        # Add two users (modify this based on your needs)
-        cursor.execute('''
-            INSERT INTO users (first_name, last_name, dob, gender, login_name, email, password)
-            VALUES ('John', 'Doe', '1990-01-01', 'Male', 'john_doe', 'john@example.com', 'password123'),
-                   ('Jane', 'Smith', '1985-05-15', 'Female', 'jane_smith', 'jane@example.com', 'pass456')
-        ''')
-        conn.commit()
-
     except psycopg2.Error as e:
         print(f"Error creating users table: {e}")
 
+    finally:
+        conn.close()
+
+
+
+def add_initial_users(db_args):
+    # List of initial users to be added
+    initial_users = [
+        ('John', 'Doe', '1990-01-01', 'Male', 'john_doe', 'john@example.com', 'password123'),
+        ('Jane', 'Smith', '1985-05-15', 'Female', 'jane_smith', 'jane@example.com', 'pass456')
+    ]
+
+    conn = psycopg2.connect(**db_args)
+    cursor = conn.cursor()
+
+    try:
+        for user_data in initial_users:
+            first_name, last_name, dob, gender, login_name, email, password = user_data
+
+            # Check if login_name already exists
+            cursor.execute("SELECT COUNT(*) FROM users WHERE login_name = %s", (login_name,))
+            count = cursor.fetchone()[0]
+
+            if count > 0:
+                # Username already taken, print a message
+                print(f"User '{login_name}' already exists in the database.")
+            else:
+                # Username is unique, proceed with insertion
+                cursor.execute("INSERT INTO users (first_name, last_name, dob, gender, login_name, email, password) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                               (first_name, last_name, dob, gender, login_name, email, password))
+                conn.commit()
+
+                # Fetch and print the inserted user ID
+                cursor.execute("SELECT lastval()")
+                user_id = cursor.fetchone()[0]
+                print(f"User '{login_name}' added successfully with ID: {user_id}")
+
+    except psycopg2.Error as e:
+        print(f"Error adding initial users: {e}")
     finally:
         conn.close()
 
@@ -156,11 +186,13 @@ def get_user_by_credentials(username, password, db_args):
         cursor.execute("SELECT * FROM users WHERE login_name=%s", (username,))
         user = cursor.fetchone()
 
-        if user and user[6] == password:  # Check if the password matches
-            print(f"Password comparison: {user[6]} == {password}")
+        if user and user[7] == password:  # Check if the password matches
+            print(f"Stored Password: {user[7]}, Entered Password: {password}")
+            print("Password comparison successful.")
             return user
         else:
-            print(f"Password comparison failed: {user[6]} != {password}")
+            print(f"Stored Password: {user[7]}, Entered Password: {password}")
+            print("Password comparison failed.")
             return None
 
     except psycopg2.Error as e:
@@ -172,13 +204,12 @@ def get_user_by_credentials(username, password, db_args):
         
 
 def authenticate_user(username, password, db_args):
-    print(f"Attempting authentication with username: {username}, password: {password}")
     conn = psycopg2.connect(**db_args)
     cursor = conn.cursor()
 
     try:
         # Fetch the user ID based on the provided username and password
-        cursor.execute("SELECT id FROM users WHERE login_name = %s AND password = %s", (username, password))
+        cursor.execute("SELECT id FROM users WHERE login_name = %s AND password = %s", (username, password,))
         user_id = cursor.fetchone()
 
         return user_id[0] if user_id else None
@@ -205,7 +236,3 @@ def get_user_by_email(email, db_args):
         return None
     finally:
         conn.close()
-
-
-
-

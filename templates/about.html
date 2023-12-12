@@ -10,19 +10,20 @@
 
 <div class="header">
     <h1>Welcome, {{ user_first_name }}!</h1>
-    <div class="navigation">
-        <a href="{{ url_for('about') }}">About</a>
-        <a href="">Exercise Lookup</a> <!-- Placeholder for exercise lookup -->
-        <a href="">Exercise Log</a> <!-- Placeholder for exercise log -->
-        <a href="">Food Lookup</a> <!-- Placeholder for food lookup -->
-        <a href="">Food Log</a> <!-- Placeholder for food log -->
-
         <form method="post" action="{{ url_for('logout') }}" class="logout-form">
             <button type="submit">Logout</button>
         </form>
-
-    </div>
 </div>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <ul>
+        <li><a href="{{ url_for('about', user_id=user_id) }}">About</a></li>
+        <li><a href="{{ url_for('render_food_tracking', user_id=user_id) }}">Food Tracking</a></li>
+        <li><a href="{{ url_for('foodlookup', user_id=user_id) }}">Food Lookup</a></li>
+        <li><a href="{{ url_for('render_exercise_input', user_id=user_id) }}">Exercise Input</a></li>
+        <li><a href="{{ url_for('render_exercise_log', user_id=user_id) }}">Exercise Log</a></li>
+    </ul>
+</nav>
 <div class="content">
     <h2>Team 3 Fitness Application</h2>
     <p>

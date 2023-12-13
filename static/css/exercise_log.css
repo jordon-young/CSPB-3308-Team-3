@@ -34,3 +34,12 @@ body {
     text-align: center;
     padding: 20px;
 }
+
+main {
+    margin: 2rem;
+}
+
+iframe {
+    height: max-content;
+    width: 100%;
+}

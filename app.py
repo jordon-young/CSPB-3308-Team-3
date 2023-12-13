@@ -78,6 +78,7 @@ def drop_workouts():
 #   URL Paths
 #
 #   Routes for Navigation
+#       / (Home Navigation)
 #       /login (page)
 #       /about (page)
 #       /create_account (page)
@@ -100,6 +101,10 @@ def drop_workouts():
 # db.users.add_user('Jane', 'Smith', '1985-05-15', 'Female', 'jane_smith', 'jane@example.com', 'pass456', db_args)
 
 ##########################################
+
+@app.route('/')
+def render_home():
+    return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

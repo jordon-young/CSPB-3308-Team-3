@@ -124,7 +124,7 @@ def login():
             print(f"User ID: {user_id}")
 
             # Authentication successful, redirect to the 'about' page with user ID
-            return redirect(url_for('about', user_id=user_id))
+            return redirect(url_for('about', user_id=user_id, code=302))
 
         else:
             # Authentication failed, show an error message

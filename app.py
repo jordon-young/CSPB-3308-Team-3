@@ -146,7 +146,7 @@ def about():
 
     if user_id:
         # If user ID is provided, fetch user details from the database
-        user_details = get_user_by_id(user_id, db_args)
+        user_details = db.users.get_user_by_id(user_id, db_args)
 
         if user_details:
             # Extract first name from user details

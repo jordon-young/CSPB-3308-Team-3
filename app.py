@@ -102,10 +102,7 @@ def drop_workouts():
 
 ##########################################
 
-@app.route('/')
-def render_home():
-    return render_template('home.html')
-
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Initialize the users table and add initial users during the application initialization

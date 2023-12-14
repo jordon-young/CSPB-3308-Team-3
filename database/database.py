@@ -13,7 +13,7 @@ from . import users
 # created first.
 #
 def create_database(db, db_args):
-    users.create_users_table_and_add_users(db_args) # Call the combined function to create the table and add users
+    users.create_users_table(db_args) # Call the combined function to create the table and add users
     foods.create_foods(db, db_args)
     food_tracking.create_food_tracking(db, db_args)
     workouts.create_workouts(db, db_args) # Requires Users

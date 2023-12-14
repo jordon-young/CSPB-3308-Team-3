@@ -179,10 +179,10 @@ def create_account():
         else:
             try:
                 # Create the database if it doesn't exist
-                create_database(db_args)
+                db.users.create_database(db_args)
 
                 # Add the user to the database
-                user_id = add_user(first_name, last_name, dob, gender, username, email, password, db_args)
+                user_id = db.users.add_user(first_name, last_name, dob, gender, username, email, password, db_args)
 
                 # Redirect to the login page after successful account creation
                 flash('Account created successfully. Please log in.', 'success')
@@ -209,7 +209,7 @@ def forgot_password():
         email = request.form['email']
 
         # Check if the email exists in the database
-        user = get_user_by_email(email, db_args)
+        user = db.users.get_user_by_email(email, db_args)
 
         if user:
             # Email found, redirect to login page or perform further actions

@@ -31,7 +31,7 @@ Version control repository link (make sure the instructor(s) have access): https
 
 
 List your public hosting site and make sure that it is available: 
-Page: https://team-3-sb0f.onrender.com/
+Page: https://team-3-sb0f.onrender.com/  
 Force Rebuild: https://api.render.com/deploy/srv-clp7v89oh6hc73buj3n0?key=5Zu3lRKyBwA
 
 Include a Final Status Report: This is included in our README.md file but it is also pasted below.

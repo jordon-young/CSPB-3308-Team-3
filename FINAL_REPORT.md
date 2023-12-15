@@ -82,3 +82,16 @@ Future features
    - Button selectors for exercise type (cardio, weight training).
    - Drop down integer fields that define the sets of an individual weight training exercise.
 3. Improved CSS that organizes the input form to create a simple but detailed experience for the user.
+
+
+### Food Tracking Page
+
+Current/Issues - The food tracking page currently has input fields for the date, calories, fats, proteins and carbs. It then has two functionalities that can be used with those inputs, the first is to load them into the food tracking table in our database, and the second is that it includes a table that can take multiple of those inputs and list each entry as well as the total macros across all of the entries. The idea for this was that if a meal had multiple items in it, you could implement the nutritional info for each of them and then you would only have to add the meal to the tracking table rather than each part of the meal. There are buttons for both of the above functions as well as a reset button that can reset the table showing the total inputs.
+
+Future features
+1. The food history table isn't currently connected to the users table. This means that when you upload nutrional values to the table, there is no tag to retrieve an individual users data. The idea of the table is that it can be used to track a users nutritional history, so in order to do that, the food_history table has to have a reference to the users table so that each users history can be differentiated.
+   - This will allow tracking of a users nutritional history which can then be analyzed to give users nutritional advice.
+2. Once the previous feature is added, I want to add something to the food tracking html that will pull a users history from the database and then display it to them in a table or perhaps different graphs or plots.
+3. Another feature that we planned to add was connecting the food tracking page to the food lookup page so that users didn't have to find and input the nutritional values of food on their own but could instead use the nutritional values already present in our database.
+
+

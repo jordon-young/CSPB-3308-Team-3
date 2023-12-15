@@ -71,3 +71,14 @@ Current - The about page serves as a landing page after the user logs in. Curren
 Future features
 1. Implement security features to redirect the user to the login page if a valid user ID is not passed with the URL.
 2. Add more aesthetic features consistent with the brand.
+
+### Exercise Input Page
+
+Current/Issues - Where the page currently stands it has created fields and supports the correct data types. As a standalone page it had full working database function, but because of poor planning and communication I did not have my page set up to communicate with other team memebers page. The hope the exercise_input page would take the data input, store it into the database, and when routed to the exercise_log page, the data would be shown there from my page. I did not account for that in getting it to work on my own so the overall functionality suffered a bit. There is javascript written to populate the 'workouts' table, but the output routing is defined wrong.
+
+Future features
+1. The exercise input page can store groups of individual exercises into an entire workout session.
+2. More detail and a couple of more data fields in the exercise input form
+   - Button selectors for exercise type (cardio, weight training).
+   - Drop down integer fields that define the sets of an individual weight training exercise.
+3. Improved CSS that organizes the input form to create a simple but detailed experience for the user.

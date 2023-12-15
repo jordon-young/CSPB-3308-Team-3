@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise Tracker</title>
+
+    <link rel="stylesheet" href="/static/css/exercise_input.css" />
+
+    <script type="text/javascript" src="/static/javascript/exercise_input.js" defer></script>
+
+
+</head>
+
+<body onload="Javascript:populate_table()">
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <ul>
+        <li><a href="{{ url_for('about', user_id=user_id) }}">About</a></li>
+        <li><a href="{{ url_for('render_food_tracking', user_id=user_id) }}">Food Tracking</a></li>
+        <li><a href="{{ url_for('foodlookup', user_id=user_id) }}">Food Lookup</a></li>
+        <li><a href="{{ url_for('render_exercise_input', user_id=user_id) }}">Exercise Input</a></li>
+        <li><a href="{{ url_for('render_exercise_log', user_id=user_id) }}">Exercise Log</a></li>
+    </ul>
+</nav>
+    <br>
+
+    <!--<div id="imagefield">
+        <img src="/static/exercise1.jpg" alt="girl exercising" class="center">
+    </div>-->
+    
+    <br>
+    
+    <div id="inputhead">
+        <h2>{{ user_first_name }}, Please enter your exercise stats here</h2>
+    </div>
+    
+    <div id="inputform">
+        <form action ="/testinput" method="POST">
+        <ul>
+        <!--Using entry form. would like vertical button selectors in future-->
+            <li>    
+                <label for="dateinput">Date of Workout</label>
+                <input type="date" name="dateinput" id="dateinput"  required>
+            </li>
+            <li>    
+                <label for="exercise_name">Exercise</label>
+                <input type="text" id="exercise_name" name="exercise_name" required>
+            </li>
+        <!--exercise entry box. start rudimentry support string input. down the road(maybe) auto-complete exercise name-->
+            <li>
+                <label for="exercise_type">Type of Exercise</label>
+                <input type="text" id="exercise_type" name="exercise_type" required>
+            </li>
+        <!-- exercise duration entry box. Supports integer input  -->
+            <li>
+                <label for="exercise_minute">Exercise Duration</label>
+                <input type="number" id="exercise_minute" name="exercise_minute" required>
+            </li>
+        <!--Section for notes for workout.-->
+            <li id="notes">
+                <p><label for="exercise_notes">Notes about workout</label></p>
+                <textarea id="exercise_notes" name="exercise_notes" rows="5" cols="50"></textarea>
+            </li>
+        </ul>
+        <!--Form submit button for all data entered above-->
+        <div id="dataSubmit">
+            <input type="submit" value="Submit!">
+            </div>
+        </form>
+    </div>
+</body>
+</html>       

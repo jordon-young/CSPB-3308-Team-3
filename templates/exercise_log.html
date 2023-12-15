@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise Log</title>
+    <link rel="stylesheet" href="/static/css/exercise_log.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+<nav class="navbar">
+  <ul>
+      <li><a href="{{ url_for('about', user_id=user_id) }}">About</a></li>
+      <li><a href="{{ url_for('render_food_tracking', user_id=user_id) }}">Food Tracking</a></li>
+      <li><a href="{{ url_for('foodlookup', user_id=user_id) }}">Food Lookup</a></li>
+      <li><a href="{{ url_for('render_exercise_input', user_id=user_id) }}">Exercise Input</a></li>
+      <li><a href="{{ url_for('render_exercise_log', user_id=user_id) }}">Exercise Log</a></li>
+  </ul>
+</nav>
+    <main>
+      <h1>Here is your Exercise Log {{ user_first_name }}</h1>
+      <iframe src="https://team-3-sb0f.onrender.com/db/workouts/get_workouts" title="Output Log"></iframe>
+    </main>
+
+    <!-- 
+       Templates 
+    -->
+
+    <template id="workout">
+      <section>
+        <h1 class="workout-type">Strength Training</h1>
+        <p class="workout-datetime">Datetime</p>
+        <button>Expand / Collapse</button>
+      </section>
+    </template>
+
+    <template id="exercise">
+      <section>
+        <h1 class="exercise-name">Exercise Name</h1>
+        <button>Expand / Collapse</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Weight</th>
+              <th>Reps</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody class="sets"></tbody>
+        </table>
+      </section>
+    </template>
+
+    <template id="set">
+      <tr>
+        <td class="set"></td>
+        <td class="weight"></td>
+        <td class="repetitions"></td>
+        <td class="duration"></td>
+      </tr>
+    </template>
+  </body>
+</html>

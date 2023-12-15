@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise Log</title>
+    <link rel="stylesheet" href="/static/css/home.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <main>
+      <h1>Team 3 Project</h1>
+      <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('about', user_id=user_id) }}">About</a></li>
+            <li><a href="{{ url_for('render_food_tracking', user_id=user_id) }}">Food Tracking</a></li>
+            <li><a href="{{ url_for('foodlookup', user_id=user_id) }}">Food Lookup</a></li>
+            <li><a href="{{ url_for('render_exercise_input', user_id=user_id) }}">Exercise Input</a></li>
+            <li><a href="{{ url_for('render_exercise_log', user_id=user_id) }}">Exercise Log</a></li>
+        </ul>
+      </nav>
+    </main>
+  </body>
+</html>

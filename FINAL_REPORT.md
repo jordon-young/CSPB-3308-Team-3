@@ -1,4 +1,4 @@
-# Team 3 Fitness/App Tracker Final Report
+# Team 3 Fitness Tracker Final Report
 
 Project Title: Team 3 Fitness Tracker Application
 

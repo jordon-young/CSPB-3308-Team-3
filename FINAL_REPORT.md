@@ -32,7 +32,6 @@ Version control repository link (make sure the instructor(s) have access): https
 
 List your public hosting site and make sure that it is available: 
 Page: https://team-3-sb0f.onrender.com/  
-Force Rebuild: https://api.render.com/deploy/srv-clp7v89oh6hc73buj3n0?key=5Zu3lRKyBwA
 
 Include a Final Status Report: This is included in our README.md file but it is also pasted below.
 
@@ -82,6 +81,24 @@ Future features
    - Button selectors for exercise type (cardio, weight training).
    - Drop down integer fields that define the sets of an individual weight training exercise.
 3. Improved CSS that organizes the input form to create a simple but detailed experience for the user.
+
+### Exercise Output Page
+
+#### Current State
+
+Upon visiting the URL for the exercise output, a fetch request is made to the database API to select all exercises. The JSON returned from the request is loaded in an iframe.
+
+#### Known Issues
+
+The API for adding workouts is functional, but the connection from the input page does not work, so the only way to add new entries is by manually using the API, as in this example:
+
+`/db/workouts/create_workout?date=2023-12-31&name=Jogging&duration=30&type=Cardio&notes=Morning+run`
+
+#### Future Features
+
+Our original intention was to have a much more complicated input interface and relational database for managing different workout types and exercises. The output page would have needed to list all workouts, and the user could choose to expand sections to see more information about that workout, depending on the type.
+
+In the case of a strength training workout, expanding the workout entry would show the exercises performed during that workout, and expanding a particular exercise would show information about the sets completed. The expand / collapse functionality was going to be used as a learning opportunity, not as a practical solution–each expand action would be an API request.
 
 
 ### Food Tracking Page

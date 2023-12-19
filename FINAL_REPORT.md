@@ -112,3 +112,19 @@ Future features
 3. Another feature that we planned to add was connecting the food tracking page to the food lookup page so that users didn't have to find and input the nutritional values of food on their own but could instead use the nutritional values already present in our database.
 
 
+### Food Lookup and Add Food 
+
+#### What Was Completed: 
+- Food Lookup:
+     - A page for a user to search the foods table for existing items, receive auto-populated, clickable suggestions matching what they type into the search bar, and nutritional information (as would be found on a food nutritional label) on-click of a food item found within the database, and a message displaying that a food item could not be found by name within the database if such a match with the database could not be found matching the user's input string. A link to the add food page is available if a user wants to add a food item to the database, and links to the other pages of the project are also included on the page. 
+- Add Food:
+     - A page for a user to add food items to the backend database, with an input field for each item in the foods table (name of the item (REQUIRED), and all nutritional values as found on a nutritional label, which are all optional). A submit button is included, and error messages pop up on screen if inserting a food item does not work. Pre-filtering error messages display if a user inputs an invalid value for the name field (such as one containing numbers or special characters), and technical, SQL-related error messages are displayed for entering other invalid values (such as a duplicate name, which violates the UNIQUE constraint on the name field in the foods table). A link to return the user back to food_lookup is included on the bottom of the page.
+
+#### In-progress implementation: 
+- Detecting errors in input was not completely finished, as evidenced by the technical flash messages appearing to the user upon some invalid inputs - these could have been matched to more user-friendly error messages for those unfamiliar with SQL. 
+
+#### Future plans: 
+- More input validation and security measures should be implemented to prevent SQL injection attacks. Better-looking frontend features and design should be completed for a better, cleaner look. Integrating these pages more closely with the user/login features could help give rise to other pages/features such as pages for administrators to query the database, delete the database, or delete problematic items, as well as having a user be able to see what they have added to the database, or being able to log specific food items eaten (would require integration with the food/calorie tracker as well). Documentation and testing of these pages should be improved. 
+
+#### Known problems
+- No known issues besides the technical flash messages being displayed on screen for the user, which should be altered to more user-friendly messages. Exhaustive unit-testing was not conducted, so unknown errors or issues remain a concern. 
